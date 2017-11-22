@@ -49,7 +49,6 @@ job(folderName+'/MNTLAB-'+branchName+'-main-build-job') {
                 downstreamParameterized {
                     trigger('$BUILDS_TRIGGER') {
                         triggerWithNoParameters = false
-                        //triggerFromChildProjects = false
                         block {
                     		buildStepFailure('FAILURE')
                     		failure('FAILURE')
@@ -88,11 +87,12 @@ for (i = 1; i <= childJobsNumber; i++) {
             }
         }
         steps {
-            shell('script.sh > output.txt')
+            shell('bash script.sh > output.txt; tar -czf $BRANCH_NAME_dsl_script.tar.gz ./*')
         }
         publishers {
             archiveArtifacts {
                 pattern('output.txt')
+                pattern('*_dsl_script.tar.gz')
                 onlyIfSuccessful()
             }
         }
