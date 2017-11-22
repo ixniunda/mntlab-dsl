@@ -26,14 +26,13 @@ job("${job_folder}${job_prefix}-main-${job_suffix}") {
             description('Select job to build')
             choiceType('CHECKBOX')
             groovyScript{
-                script ("import jenkins.model.*; def result=  [];def matchedJobs = Jenkins.instance.getAllItems(AbstractProject.class).findAll { job -> job.name =~ /(.*)slave(.*)/};matchedJobs.each { job -> result << \"\"$job.name\"\" }; return result")
-                }
-
+                script("import jenkins.model.*; def result=  [];def matchedJobs = Jenkins.instance.getAllItems(AbstractProject.class).findAll { job -> job.name =~ /(.*)slave(.*)/};matchedJobs.each { job -> result << \"\"$job.name\"\" }; return result")
             }
-
         }
 
     }
+
+
     configure { project ->
         project / publishers << 'hudson.tasks.BuildTrigger' {
             childProjects("\$JOB")
