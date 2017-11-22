@@ -1,5 +1,5 @@
 def branchName = "ilakhtenkov"
-def folderName = "Igor Lakhtenkov1"
+def folderName = "EPBYMINW2033"
 def childJobsNumber = 4
 
 folder(folderName) {
