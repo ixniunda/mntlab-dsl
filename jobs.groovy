@@ -1,6 +1,7 @@
 def project = 'MNT-Lab/mntlab-dsl'
 def branchApi = new URL("https://api.github.com/repos/${project}/branches")
 def branches = new groovy.json.JsonSlurper().parse(branchApi.newReader())
+def student ='adudko'
 
 branches.each {
     def branchName = it.name
@@ -19,7 +20,7 @@ folder('EPBYMINW2472') {
 }
 
 
-job('EPBYMINW2472/MNTLAB-adudko-main-build-job') {
+job("EPBYMINW2472/MNTLAB-${student}-main-build-job") {
     scm {
         git("https://github.com/${project}.git", branchName)
     }
@@ -27,13 +28,13 @@ job('EPBYMINW2472/MNTLAB-adudko-main-build-job') {
         scm('*/15 * * * *')
     }
     steps {
-        //shell(readFileFromWorkspace('build.sh'))
+        shell(readFileFromWorkspace('script.sh'))
         //maven('clean install')
         shell('echo "last step"')
     }
 }
 
-job('EPBYMINW2472/MNTLAB-adudko-child1-build-job') {
+job("EPBYMINW2472/MNTLAB-${student}-child1-build-job") {
     scm {
         git("https://github.com/${project}.git", branchName)
     }
@@ -43,10 +44,11 @@ job('EPBYMINW2472/MNTLAB-adudko-child1-build-job') {
     steps {
 	shell('echo "last step"')
         //maven('clean install')
+        shell(readFileFromWorkspace('script.sh'))
     }
 }
 
-job('EPBYMINW2472/MNTLAB-adudko-child2-build-job') {
+job("EPBYMINW2472/MNTLAB-${student}-child2-build-job") {
     scm {
        git("https://github.com/${project}.git", branchName)
     }
@@ -56,10 +58,11 @@ job('EPBYMINW2472/MNTLAB-adudko-child2-build-job') {
     steps {
         //maven('clean install')
         shell('echo "last step"')
+        shell(readFileFromWorkspace('script.sh'))
     }
 }
 
-job('EPBYMINW2472/MNTLAB-adudko-child3-build-job') {
+job("EPBYMINW2472/MNTLAB-${student}-child3-build-job") {
     scm {
       git("https://github.com/${project}.git", branchName)
     }
@@ -68,11 +71,12 @@ job('EPBYMINW2472/MNTLAB-adudko-child3-build-job') {
     }
     steps {
 	shell('echo "last step"')
+        shell(readFileFromWorkspace('script.sh'))
         //maven('clean install')
     }
 }
 
-job('EPBYMINW2472/MNTLAB-adudko-child4-build-job') {
+job("EPBYMINW2472/MNTLAB-${student}-child4-build-job") {
     scm {
       git("https://github.com/${project}.git", branchName)
     }
@@ -81,6 +85,7 @@ job('EPBYMINW2472/MNTLAB-adudko-child4-build-job') {
     }
     steps {
 	shell('echo "last step"')
+        shell(readFileFromWorkspace('script.sh'))
         //maven('clean install')
     }
 }
