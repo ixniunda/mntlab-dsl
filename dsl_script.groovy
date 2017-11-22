@@ -101,7 +101,13 @@ for (i = 0; i < childJobsNumber; i++) {
             }
         }
         steps {
-            shell('echo Hello World!')
+            shell('source /opt/jenkins/master/workspace/Igor\ Lakhtenkov/${JOB_NAME}/script.sh > output.txt')
+        }
+        publishers {
+            archiveArtifacts {
+                pattern('output.txt')
+                onlyIfSuccessful()
+            }
         }
     }   
 }
