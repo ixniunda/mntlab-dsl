@@ -101,8 +101,7 @@ for (i = 0; i < childJobsNumber; i++) {
             }
         }
         steps {
-            
-            }
+            shell('echo Hello World!')
         }
     }   
 }
