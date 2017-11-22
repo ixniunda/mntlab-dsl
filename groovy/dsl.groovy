@@ -14,7 +14,7 @@ job("${job_folder}${job_prefix}-main-${job_suffix}") {
         }
     }
     parameters {
-        activeChoiceReactiveParam('BRANCHE_NAME') {
+        activeChoiceParam('BRANCHE_NAME') {
             description('Allows user choose from multiple choices')
 
             choiceType('SINGLE_SELECT')
@@ -22,12 +22,13 @@ job("${job_folder}${job_prefix}-main-${job_suffix}") {
                 script("return [ '${git_brunch}', 'master' ]")
             }
         }
-        activeChoiceReactiveParam ('JOB') {
+        activeChoiceParam ('JOB') {
             description('Select job to build')
             choiceType('CHECKBOX')
             groovyScript{
-                script ("list=[];(1..4).each {list << (\"${job_prefix}-slave\${it}-${job_suffix}\")}; return list ")
-                fallbackScript('')
+                script ("import jenkins.model.*; def result=  [];def matchedJobs = Jenkins.instance.getAllItems(AbstractProject.class).findAll { job -> job.name =~ /(.*)slave(.*)/};matchedJobs.each { job -> result << \"\"$job.name\"\" }; return result")
+                }
+
             }
 
         }
