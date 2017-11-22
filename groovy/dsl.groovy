@@ -15,7 +15,7 @@ job("${job_folder}${job_prefix}-main-${job_suffix}") {
         }
     }
     parameters {
-        activeChoiceParam('BRANCHE_NAME') {
+        activeChoiceParam('BRANCH_NAME') {
             description('Allows user choose from multiple choices')
 
             choiceType('SINGLE_SELECT')
@@ -45,7 +45,7 @@ job("${job_folder}${job_prefix}-main-${job_suffix}") {
                             failure ('FAILURE')
                         }
                         parameters {
-                            predefinedProp ("BRANCHE_NAME", "\$BRANCHE_NAME")
+                            predefinedProp ("BRANCH_NAME", "\$BRANCH_NAME")
                         }
                     }
                 }
