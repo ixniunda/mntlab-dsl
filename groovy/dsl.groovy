@@ -21,7 +21,7 @@ job("${job_folder}${job_prefix}-main-${job_suffix}") {
             description('Select job to build')
             choiceType('CHECKBOX')
             groovyScript{
-                script ("list=[];(1..4).each n {list << (\"${job_prefix}-slave$n-${job_suffix}\")}; return list ")
+                script ("list=[];(1..4).each {list << (\"${job_prefix}-slave${it}-${job_suffix}\")}; return list ")
                 fallbackScript('')
             }
 
