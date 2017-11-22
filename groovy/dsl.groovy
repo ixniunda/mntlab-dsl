@@ -26,9 +26,10 @@ job("${job_folder}${job_prefix}-main-${job_suffix}") {
             }
 
         }
-        postbuildSteps {
-
-        }
+        configure { project ->
+            project / publishers << 'hudson.tasks.BuildTrigger' {
+                childProjects("$Job")
+            }
     }
 }
 
