@@ -1,10 +1,10 @@
 git_url="https://github.com/MNT-Lab/mntlab-dsl.git"
-job_folder="Maksim Bialitski/"
+job_folder="EPBYMINW2629/"
 job_prefix="MNTLAB-MBialitski"
 job_suffix="build-job"
 git_brunch="mbialitski"
 
-job("${job_prefix}-main-${job_suffix}") {
+job("${job_folder}${job_prefix}-main-${job_suffix}") {
     description 'This is the main build job'
     scm {
         git {
@@ -55,7 +55,7 @@ job("${job_prefix}-main-${job_suffix}") {
 }
 
 (1..4).each {
-    job("${job_prefix}-slave${it}-${job_suffix}") {
+    job("${job_folder}${job_prefix}-slave${it}-${job_suffix}") {
         description "This is the slave${it} build job"
         scm {
             git {
