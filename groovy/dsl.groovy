@@ -14,14 +14,14 @@ job("${job_folder}${job_prefix}-main-${job_suffix}") {
 
             choiceType('SINGLE_SELECT')
             groovyScript {
-                script("return ['${git_brunch}', 'master']")
+                script("return [ '${git_brunch}', 'master' ]")
             }
         }
-        activeChoiceParam ('Job') {
+        activeChoiceParam ('JOB') {
             description('Select job to build')
             choiceType('CHECKBOX')
             groovyScript{
-                script ("list=[];(1..4).each {list << (\"${job_prefix}-slave${it}-${job_suffix}\")}; return list ")
+                script ("list=[];(1..4).each {list << (\"${job_prefix}-slave\${it}-${job_suffix}\")}; return list ")
                 fallbackScript('')
             }
 
@@ -30,13 +30,13 @@ job("${job_folder}${job_prefix}-main-${job_suffix}") {
     }
     configure { project ->
         project / publishers << 'hudson.tasks.BuildTrigger' {
-            childProjects("$Job")
+            childProjects("\$JOB")
         }
     }
 }
 
 (1..4).each {
-    job("${job_folder}${job_prefix}-slabe${it}-${job_suffix}"){
+    job("${job_folder}${job_prefix}-slave${it}-${job_suffix}"){
         description "This is the slave${it} build job"
         scm	{
             github (git_url,git_brunch)
