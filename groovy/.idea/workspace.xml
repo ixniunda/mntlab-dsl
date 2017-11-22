@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="01ec759c-2b56-48ec-9b3a-5aec88eb3e5a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dsl.groovy" afterPath="$PROJECT_DIR$/dsl.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/get_git_brunches.groovy" afterPath="$PROJECT_DIR$/get_git_brunches.groovy" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,8 +28,8 @@
       <file leaf-file-name="dsl.groovy" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dsl.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="431">
-              <caret line="77" column="1" lean-forward="true" selection-start-line="77" selection-start-column="1" selection-end-line="77" selection-end-column="1" />
+            <state relative-caret-position="252">
+              <caret line="68" column="61" lean-forward="false" selection-start-line="68" selection-start-column="61" selection-end-line="68" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -252,8 +253,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dsl.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="431">
-          <caret line="77" column="1" lean-forward="true" selection-start-line="77" selection-start-column="1" selection-end-line="77" selection-end-column="1" />
+        <state relative-caret-position="252">
+          <caret line="68" column="61" lean-forward="false" selection-start-line="68" selection-start-column="61" selection-end-line="68" selection-end-column="61" />
           <folding />
         </state>
       </provider>

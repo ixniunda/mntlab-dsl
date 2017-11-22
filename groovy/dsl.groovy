@@ -2,14 +2,14 @@ git_url="https://github.com/MNT-Lab/mntlab-dsl.git"
 job_folder="Maksim Bialitski/"
 job_prefix="MNTLAB-MBialitski"
 job_suffix="build-job"
-git_brunch="*/mbialitski"
+git_brunch="mbialitski"
 
 job("${job_folder}${job_prefix}-main-${job_suffix}") {
     description 'This is the main build job'
     scm {
         git {
             remote {
-                branch(git_brunch)
+                branch("*/${git_brunch}")
                 url(git_url)
             }
         }
@@ -44,6 +44,9 @@ job("${job_folder}${job_prefix}-main-${job_suffix}") {
                             buildStepFailure ('FAILURE')
                             failure ('FAILURE')
                         }
+                        parameters {
+                            predefinedProp ("BRANCHE_NAME", "\$BRANCHE_NAME")
+                        }
                     }
                 }
             }
@@ -63,7 +66,7 @@ job("${job_folder}${job_prefix}-main-${job_suffix}") {
             }
         }
         steps {
-            shell(readFileFromWorkspace('script.sh'))
+            shell(readFileFromWorkspace('script.sh') + " >> output.log")
         }
         parameters {
             activeChoiceParam('BRANCH_NAME') {
