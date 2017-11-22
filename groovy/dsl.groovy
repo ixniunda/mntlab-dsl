@@ -14,7 +14,7 @@ job("${job_folder}${job_prefix}-main-${job_suffix}") {
         }
     }
     parameters {
-        activeChoiceParam('BRANCHE_NAME') {
+        activeChoiceReactiveParam('BRANCHE_NAME') {
             description('Allows user choose from multiple choices')
 
             choiceType('SINGLE_SELECT')
@@ -22,7 +22,7 @@ job("${job_folder}${job_prefix}-main-${job_suffix}") {
                 script("return [ '${git_brunch}', 'master' ]")
             }
         }
-        activeChoiceParam ('JOB') {
+        activeChoiceReactiveParam ('JOB') {
             description('Select job to build')
             choiceType('CHECKBOX')
             groovyScript{
