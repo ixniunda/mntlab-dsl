@@ -43,7 +43,7 @@ job("${job_folder}${job_prefix}-main-${job_suffix}") {
         }
         steps {
             //Shell(readFileFromWorkspace('script.sh'))
-            Shell("bash $WORKSPACE/script.sh"))
+            Shell("bash $WORKSPACE/script.sh")
         }
     }
 }
