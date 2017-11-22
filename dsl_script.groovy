@@ -16,9 +16,9 @@ job(folderName+'/MNTLAB-'+branchName+'-main-build-job') {
             groovyScript {
                 script('''def getbranches = ("git ls-remote -t -h https://github.com/MNT-Lab/mntlab-dsl.git").execute()
 return getbranches.text.readLines()
-    .collect { it.split()[1].replaceAll('refs/heads/', '')  }
-    .unique()
-    .findAll { it.matches('ilakhtenkov|master') }''')
+      .collect { it.split()[1].replaceAll('refs/heads/', '')  }
+      .unique()
+      .findAll { it.matches('ilakhtenkov|master') }''')
                 fallbackScript('return ["error"]')
                 filterable(false)
             }
@@ -35,7 +35,7 @@ import hudson.model.*
 
 def list =[]
 Jenkins.instance.getAllItems(AbstractProject.class).each {it ->
-  if (it.fullName.matches('Igor Lakhtenkov\\/MNTLAB-ilakhtenkov-child(.+)')) {
+  if (it.fullName.matches('Igor Lakhtenkov\\\/MNTLAB-ilakhtenkov-child(.+)')) {
     list << "${it.name}:selected"
   }
 }
@@ -88,8 +88,8 @@ for (i = 0; i < childJobsNumber; i++) {
                 groovyScript {
                     script('''def getbranches = ("git ls-remote -t -h https://github.com/MNT-Lab/mntlab-dsl.git").execute()
 return getbranches.text.readLines()
-    .collect { it.split()[1].replaceAll('refs/heads/', '')  }
-    .unique() }''')
+      .collect { it.split()[1].replaceAll('refs/heads/', '')  }
+      .unique() ''')
                     fallbackScript('return ["error"]')
                     filterable(false)
                 }
