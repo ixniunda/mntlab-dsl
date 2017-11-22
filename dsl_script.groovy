@@ -15,11 +15,12 @@ job(folderName+'/MNTLAB-'+branchName+'-main-build-job') {
             choiceType('SINGLE_SELECT')
             groovyScript {
                 script('''def getbranches = ("git ls-remote -t -h https://github.com/MNT-Lab/mntlab-dsl.git").execute()
-					return getbranches.text.readLines()
-        				.collect { it.split()[1].replaceAll('refs/heads/', '')  }
-        				.unique()
-        				.findAll { it.matches('ilakhtenkov|master') }''')
+return getbranches.text.readLines()
+    .collect { it.split()[1].replaceAll('refs/heads/', '')  }
+    .unique()
+    .findAll { it.matches('ilakhtenkov|master') }''')
                 fallbackScript('return ["error"]')
+                filterable(false)
             }
         }
     }
@@ -30,16 +31,17 @@ job(folderName+'/MNTLAB-'+branchName+'-main-build-job') {
             choiceType('CHECKBOX')
             groovyScript {
                 script('''import jenkins.model.*;
-						  import hudson.model.*
+import hudson.model.*
 
-						  def list =[]
-						  Jenkins.instance.getAllItems(AbstractProject.class).each {it ->
-  							if (it.fullName.matches('Igor Lakhtenkov\\/MNTLAB-ilakhtenkov-child(.+)')) {
-    							list << "${it.name}:selected"
-  							}
-						  }
-						  return list''')
+def list =[]
+Jenkins.instance.getAllItems(AbstractProject.class).each {it ->
+  if (it.fullName.matches('Igor Lakhtenkov\\/MNTLAB-ilakhtenkov-child(.+)')) {
+    list << "${it.name}:selected"
+  }
+}
+return list''')
                 fallbackScript('return ["error"]')
+                filterable(false)
             }
         }
      }
@@ -48,7 +50,7 @@ job(folderName+'/MNTLAB-'+branchName+'-main-build-job') {
           remote {
             url('https://github.com/MNT-Lab/mntlab-dsl.git')
           }
-          branch('$BRANCH_NAME')
+          branch('*/$BRANCH_NAME')
         }
     }
     steps {
@@ -85,10 +87,11 @@ for (i = 0; i < childJobsNumber; i++) {
                 choiceType('SINGLE_SELECT')
                 groovyScript {
                     script('''def getbranches = ("git ls-remote -t -h https://github.com/MNT-Lab/mntlab-dsl.git").execute()
-                        return getbranches.text.readLines()
-                            .collect { it.split()[1].replaceAll('refs/heads/', '')  }
-                            .unique() }''')
+return getbranches.text.readLines()
+    .collect { it.split()[1].replaceAll('refs/heads/', '')  }
+    .unique() }''')
                     fallbackScript('return ["error"]')
+                    filterable(false)
                 }
             }
         }
@@ -97,7 +100,7 @@ for (i = 0; i < childJobsNumber; i++) {
               remote {
                 url('https://github.com/MNT-Lab/mntlab-dsl.git')
               }
-              branch('$BRANCH_NAME')
+              branch('*/$BRANCH_NAME')
             }
         }
         steps {
