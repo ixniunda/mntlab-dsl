@@ -38,8 +38,13 @@ job("${job_folder}${job_prefix}-main-${job_suffix}") {
             }
             runner('Fail')
             steps {
-                remoteTrigger('?????', "\$JOB") {
-                    blockBuildUntilComplete()
+                downstreamParameterized {
+                    trigger ("\$JOB") {
+                        block {
+                            buildStepFailure ('FAILURE')
+                            failure ('FAILURE')
+                        }
+                    }
                 }
             }
 
