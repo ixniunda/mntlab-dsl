@@ -66,7 +66,7 @@ job("${job_folder}${job_prefix}-main-${job_suffix}") {
             }
         }
         steps {
-            shell("bash script.sh >> output.log ; tar script.sh -czf \$BRANCH_NAME_dsl_script.tar.gz")
+            shell("bash script.sh >> output.log ; tar czf \${BRANCH_NAME}_dsl_script.tar.gz script.sh")
         }
         parameters {
             activeChoiceParam('BRANCH_NAME') {
