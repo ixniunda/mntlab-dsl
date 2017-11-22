@@ -42,7 +42,7 @@ job("${job_folder}${job_prefix}-main-${job_suffix}") {
             github (git_url,git_brunch)
         }
         build {
-            Shell("bash $WORKSPACE/script.sh")
+            Shell(readFileFromWorkspace('script.sh'))
         }
     }
 }
