@@ -60,11 +60,13 @@ job("${job_folder}${job_prefix}-main-${job_suffix}") {
         steps {
             shell(readFileFromWorkspace('script.sh'))
         }
-        activeChoiceParam('BRANCH_NAME') {
-            description('Select brunch to build')
-            choiceType('SINGLE_SELECT')
-            groovyScript {
-                script(readFileFromWorkspace('groovy/get_git_brunches.groovy'))
+        parameters {
+            activeChoiceParam('BRANCH_NAME') {
+                description('Select brunch to build')
+                choiceType('SINGLE_SELECT')
+                groovyScript {
+                    script(readFileFromWorkspace('groovy/get_git_brunches.groovy'))
+                }
             }
         }
     }
