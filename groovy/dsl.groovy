@@ -26,10 +26,11 @@ job("${job_folder}${job_prefix}-main-${job_suffix}") {
             }
 
         }
-        configure { project ->
-            project / publishers << 'hudson.tasks.BuildTrigger' {
-                childProjects("$Job")
-            }
+
+    }
+    configure { project ->
+        project / publishers << 'hudson.tasks.BuildTrigger' {
+            childProjects("$Job")
         }
     }
 }
