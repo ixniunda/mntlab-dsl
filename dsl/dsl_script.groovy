@@ -86,6 +86,9 @@ for (i = 1; i <= childJobsNumber; i++) {
               branch('*/$BRANCH_NAME')
             }
         }
+        wrappers {
+              preBuildCleanup()
+        }
         steps {
             shell('bash script.sh > output.txt; tar -czf \${BRANCH_NAME}_dsl_script.tar.gz ./*')
         }
