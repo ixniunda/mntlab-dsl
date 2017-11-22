@@ -101,7 +101,7 @@ for (i = 0; i < childJobsNumber; i++) {
             }
         }
         steps {
-            shell('source /opt/jenkins/master/workspace/Igor\ Lakhtenkov/${JOB_NAME}/script.sh > output.txt')
+            shell('script.sh > output.txt')
         }
         publishers {
             archiveArtifacts {
