@@ -100,7 +100,7 @@ for(def i=1; i<5; i++){
   
   steps {
         
-        shell('chmod a+x script.sh;./script.sh > output.txt;tar -czvf $BRANCH_NAME_dsl_script.tar.gz output.txt script.sh dsl.groovy')
+        shell('chmod a+x script.sh;./script.sh > output.txt;tar -czvf "$BRANCH_NAME"_dsl_script.tar.gz output.txt script.sh dsl.groovy')
     } 
  }
 }
