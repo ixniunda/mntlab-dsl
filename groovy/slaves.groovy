@@ -5,6 +5,7 @@ def matchedJobs = Jenkins.instance.getAllItems(AbstractProject.class).findAll { 
     job.name =~ /(.*)slave(.*)/
 }
 matchedJobs.each { job -> 
-    result << "\"$job.name\"" 
+    result.add("$job.name") 
 }
+
 return result
