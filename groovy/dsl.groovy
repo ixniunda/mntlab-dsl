@@ -41,9 +41,9 @@ job("${job_folder}${job_prefix}-main-${job_suffix}") {
         scm	{
             github (git_url,git_brunch)
         }
-        steps {
+  //      steps {
             //Shell(readFileFromWorkspace('script.sh'))
-            Shell("echo hello")
-        }
+  //          Shell("echo hello")
+ //       }
     }
 }
