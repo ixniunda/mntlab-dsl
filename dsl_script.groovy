@@ -45,5 +45,28 @@ activeChoiceParam('BUILDS_TRIGGER') {
           branch('$BRANCH_NAME')
         }
     }
+    steps {
+        conditionalSteps{
+            condition{
+                alwaysRun()
+            }
+            steps {
+                downstreamParameterized {
+                    trigger('$BRANCH_NAME') {
+                        triggerWithNoParameters = false
+                        //triggerFromChildProjects = false
+                        block {
+                    		buildStepFailure('FAILURE')
+                    		failure('FAILURE')
+                    		unstable('UNSTABLE')
+                        }
+                        parameters {
+                    		predefinedProp('BRANCH_NAME', '$BRANCH_NAME')
+                    	}
+                    }
+                }    
+            } 
+        }
+    }
 }
        
