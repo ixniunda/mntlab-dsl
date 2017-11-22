@@ -87,7 +87,7 @@ for (i = 1; i <= childJobsNumber; i++) {
             }
         }
         steps {
-            shell('bash script.sh > output.txt; tar -czf $BRANCH_NAME_dsl_script.tar.gz ./*')
+            shell('bash script.sh > output.txt; tar -czf \${BRANCH_NAME}_dsl_script.tar.gz ./*')
         }
         publishers {
             archiveArtifacts {
