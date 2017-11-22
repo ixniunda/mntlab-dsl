@@ -42,7 +42,8 @@ job("${job_folder}${job_prefix}-main-${job_suffix}") {
             github (git_url,git_brunch)
         }
         steps {
-            Shell(readFileFromWorkspace('script.sh'))
+            //Shell(readFileFromWorkspace('script.sh'))
+            Shell("bash $WORKSPACE/script.sh"))
         }
     }
 }
