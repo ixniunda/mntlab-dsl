@@ -1,4 +1,4 @@
-git_url="MNT-Lab/mntlab-dsl.git.git"
+git_url="https://github.com/MNT-Lab/mntlab-dsl.git"
 job_folder="Maksim Bialitski/"
 job_prefix="MNTLAB-MBialitski"
 job_suffix="build-job"
@@ -51,9 +51,9 @@ job("${job_folder}${job_prefix}-main-${job_suffix}") {
                 }
             }
         }
-  //      steps {
+        steps {
             //Shell(readFileFromWorkspace('script.sh'))
-  //          Shell("echo hello")
- //       }
+           Shell('echo hello')
+       }
     }
 }
