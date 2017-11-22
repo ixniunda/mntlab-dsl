@@ -64,10 +64,37 @@ return list''')
 }
   }
 }
+
 for(i in 1..4) {
     job("${folder_name}/MNTLAB-${student}-child${i}-build-job") {
-        scm {
-            git(giturl)
+      parameters {
+        stringParam('BRANCH_NAME')
+      }
+          parameters {
+        activeChoiceParam('BRANCH_NAME') {
+            description('Allows user choose from multiple choices')
+            choiceType('SINGLE_SELECT')
+            groovyScript {
+                script('''import jenkins.model.*
+import hudson.model.*
+def command = "git ls-remote -h https://github.com/MNT-Lab/mntlab-dsl.git"
+def proc = command.execute()
+def branches = proc.in.text.readLines().collect { 
+    it.replaceAll(/[a-z0-9]*\\trefs\\/heads\\//, '') 
+}
+return branches''')
+            }
         }
+    }
+      scm {
+        git("https://github.com/MNT-Lab/mntlab-dsl.git", '*/${BRANCH_NAME}')
+      }
+      steps {
+        shell("bash ./script.sh >> output.txt")
+        shell('tar -cvzf ${BRANCH_NAME}_dsl_script.tar.gz ./*')
+      }
+      publishers {
+        archiveArtifacts('**/output.*')
+      }
     }
 }
