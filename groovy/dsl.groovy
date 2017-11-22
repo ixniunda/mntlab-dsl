@@ -19,17 +19,16 @@ job("${job_folder}${job_prefix}-main-${job_suffix}") {
 
             choiceType('SINGLE_SELECT')
             groovyScript {
-                script("return [ '${git_brunch}', 'master' ]")
+                script ("return [ '${git_brunch}', 'master' ]")
             }
         }
         activeChoiceParam ('JOB') {
             description('Select job to build')
             choiceType('CHECKBOX')
-            groovyScript{
-                script("import jenkins.model.*; def result=  [];def matchedJobs = Jenkins.instance.getAllItems(AbstractProject.class).findAll { job -> job.name =~ /(.*)slave(.*)/};matchedJobs.each { job -> result << \"\"$job.name\"\" }; return result")
+            groovyScript {
+                script (readFileFromWorkspace('groovy/slaves.groovy'))
             }
         }
-
     }
 
 
