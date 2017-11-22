@@ -14,17 +14,10 @@ job("${folder_name}/MNTLAB-${student}-main-build-job") {
             groovyScript {
                 script('''import jenkins.model.*
 import hudson.model.*
-def command = "git ls-remote -h $gitURL"
+def command = "git ls-remote -h https://github.com/MNT-Lab/mntlab-dsl.git"
 def proc = command.execute()
-proc.waitFor()              
-
-if ( proc.exitValue() != 0 ) {
-   println "Error, ${proc.err.text}"
-   System.exit(-1)
-}
-
 def branches = proc.in.text.readLines().collect { 
-    it.replaceAll(/[a-z0-9]*\trefs\\/heads\\//, '') 
+    it.replaceAll(/[a-z0-9]*i\\\trefs\\/heads\\//, '') 
 }
 return branches''')
             }
@@ -40,7 +33,7 @@ return branches''')
 import hudson.model.*
 def list = []
 Jenkins.instance.getAllItems(AbstractProject.class).each {it ->
-  if(it.fullName.matches('Ihar Vauchok\\/.+')) {
+  if(it.fullName.matches('Ihar Vauchok\\\\/.+')) {
     list << "${it.name}:selected"
   }
 }
