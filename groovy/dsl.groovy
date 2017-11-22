@@ -3,7 +3,7 @@ job_folder="Maksim Bialitski/"
 job_prefix="MNTLAB-MBialitski"
 job_suffix="build-job"
 git_brunch="mbialitski"
-job("${job_folder}-${job_prefix}-main-${job_suffix}") {
+job("${job_folder}${job_prefix}-main-${job_suffix}") {
     description 'This is the main build job'
     scm	{
         github (git_url,git_brunch)
@@ -14,8 +14,7 @@ job("${job_folder}-${job_prefix}-main-${job_suffix}") {
             filterable()
             choiceType('SINGLE_SELECT')
             groovyScript {
-                script("return [git_brunch,'master']")
-                fallbackScript('')
+                script("return [${git_brunch},'master']")
             }
         }
         activeChoiceReactiveParam ('Job') {
