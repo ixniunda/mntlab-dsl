@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="01ec759c-2b56-48ec-9b3a-5aec88eb3e5a" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dsl.groovy" afterPath="$PROJECT_DIR$/dsl.groovy" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -27,8 +28,8 @@
       <file leaf-file-name="dsl.groovy" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dsl.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="68" column="90" lean-forward="false" selection-start-line="68" selection-start-column="90" selection-end-line="68" selection-end-column="90" />
+            <state relative-caret-position="306">
+              <caret line="68" column="53" lean-forward="true" selection-start-line="68" selection-start-column="53" selection-end-line="68" selection-end-column="53" />
               <folding />
             </state>
           </provider>
@@ -252,8 +253,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dsl.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="68" column="90" lean-forward="false" selection-start-line="68" selection-start-column="90" selection-end-line="68" selection-end-column="90" />
+        <state relative-caret-position="306">
+          <caret line="68" column="53" lean-forward="true" selection-start-line="68" selection-start-column="53" selection-end-line="68" selection-end-column="53" />
           <folding />
         </state>
       </provider>

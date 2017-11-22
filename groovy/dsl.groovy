@@ -60,7 +60,7 @@ job("${job_folder}${job_prefix}-main-${job_suffix}") {
         scm {
             git {
                 remote {
-                    branch(git_brunch)
+                    branch("*/\$BRANCH_NAME")
                     url(git_url)
                 }
             }
