@@ -1,4 +1,4 @@
-job('main') {
+job('EPBYMINW2695/main') {
   parameters {
   activeChoiceParam('Childs') {
         description('Name of the Childs')
