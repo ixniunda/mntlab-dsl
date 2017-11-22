@@ -1,6 +1,5 @@
 def student = 'ivauchok'
 def folder_name = 'Ihar Vauchok'
-def giturl = 'https://github.com/MNT-Lab/mntlab-dsl.git'
 
 folder(folder_name) {
     description("Folder containing all jobs for ${folder_name}")
@@ -17,9 +16,15 @@ import hudson.model.*
 def command = "git ls-remote -h https://github.com/MNT-Lab/mntlab-dsl.git"
 def proc = command.execute()
 def branches = proc.in.text.readLines().collect { 
-    it.replaceAll(/[a-z0-9]*i\\\trefs\\/heads\\//, '') 
+    it.replaceAll(/[a-z0-9]*\\trefs\\/heads\\//, '') 
 }
-return branches''')
+def list = []
+for (int i = 0; i < branches.size(); i++) {
+  if (branches[i].matches('master') || branches[i].matches('ivauchok')) {
+   list.add(branches[i]) 
+  }
+}
+return list''')
             }
         }
     }
@@ -33,7 +38,7 @@ return branches''')
 import hudson.model.*
 def list = []
 Jenkins.instance.getAllItems(AbstractProject.class).each {it ->
-  if(it.fullName.matches('Ihar Vauchok\\\\/.+')) {
+  if(it.fullName.matches('Ihar Vauchok\\\\/MNTLAB-ivauchok-c.+')) {
     list << "${it.name}:selected"
   }
 }
@@ -41,41 +46,39 @@ return list''')
             }
         }
     }
-
-  steps {
+    steps {
         conditionalSteps {
-          condition {
-            alwaysRun()
-          }
+            condition {
+                alwaysRun()
+            }
             steps {
-        downstreamParameterized {
-            trigger('${BUILDS_TRIGGER}') {
-                block {
-                    buildStepFailure('FAILURE')
-                    failure('FAILURE')
-                    unstable('UNSTABLE')
-                }
-                parameters {
-                    predefinedProp('BRANCH_NAME', '${BRANCH_NAME}')
+                downstreamParameterized {
+                    trigger('${BUILDS_TRIGGER}') {
+                        block {
+                            buildStepFailure('FAILURE')
+                            failure('FAILURE')
+                            unstable('UNSTABLE')
+                        }
+                        parameters {
+                            predefinedProp('BRANCH_NAME', '${BRANCH_NAME}')
+                        }
+                    }
                 }
             }
         }
     }
 }
-  }
-}
-
 for(i in 1..4) {
     job("${folder_name}/MNTLAB-${student}-child${i}-build-job") {
-      parameters {
-        stringParam('BRANCH_NAME')
-      }
-          parameters {
-        activeChoiceParam('BRANCH_NAME') {
-            description('Allows user choose from multiple choices')
-            choiceType('SINGLE_SELECT')
-            groovyScript {
-                script('''import jenkins.model.*
+        parameters {
+            stringParam('BRANCH_NAME')
+        }
+        parameters {
+            activeChoiceParam('BRANCH_NAME') {
+                description('Allows user choose from multiple choices')
+                choiceType('SINGLE_SELECT')
+                groovyScript {
+                    script('''import jenkins.model.*
 import hudson.model.*
 def command = "git ls-remote -h https://github.com/MNT-Lab/mntlab-dsl.git"
 def proc = command.execute()
@@ -83,18 +86,18 @@ def branches = proc.in.text.readLines().collect {
     it.replaceAll(/[a-z0-9]*\\trefs\\/heads\\//, '') 
 }
 return branches''')
+                }
             }
         }
-    }
-      scm {
-        git("https://github.com/MNT-Lab/mntlab-dsl.git", '*/${BRANCH_NAME}')
-      }
-      steps {
-        shell("bash ./script.sh >> output.txt")
-        shell('tar -cvzf ${BRANCH_NAME}_dsl_script.tar.gz ./*')
-      }
-      publishers {
-        archiveArtifacts('**/output.*')
-      }
+        scm {
+            git("https://github.com/MNT-Lab/mntlab-dsl.git", '*/${BRANCH_NAME}')
+        }
+        steps {
+            shell("bash ./script.sh >> output.txt")
+            shell('tar -cvzf ${BRANCH_NAME}_dsl_script.tar.gz ./*')
+        }
+        publishers {
+            archiveArtifacts('**/output.*')
+        }
     }
 }
