@@ -30,6 +30,7 @@ job("${job_folder}${job_prefix}-main-${job_suffix}") {
             project / publishers << 'hudson.tasks.BuildTrigger' {
                 childProjects("$Job")
             }
+        }
     }
 }
 
