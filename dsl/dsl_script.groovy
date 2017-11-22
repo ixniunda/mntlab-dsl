@@ -47,7 +47,7 @@ job(folderName+'/MNTLAB-'+branchName+'-main-build-job') {
             }
             steps {
                 downstreamParameterized {
-                    trigger('$BRANCH_NAME') {
+                    trigger('$BUILDS_TRIGGER') {
                         triggerWithNoParameters = false
                         //triggerFromChildProjects = false
                         block {
@@ -66,7 +66,7 @@ job(folderName+'/MNTLAB-'+branchName+'-main-build-job') {
 }
 for (i = 1; i <= childJobsNumber; i++) {
     job(folderName+'/MNTLAB-'+branchName+'-child'+i+'-build-job') {
-        description 'This is test main job'
+        description ('This is test child'+i+' job')
         parameters {
             activeChoiceParam('BRANCH_NAME') {
                 description('Allows branch single choice')
