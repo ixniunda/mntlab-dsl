@@ -1,5 +1,4 @@
-
-job("MNTLAB-ilahutka-main-build-job") {
+job("EPBYMINW6406/MNTLAB-ilahutka-main-build-job") {
      
 	parameters {
 		choiceParam('BRANCH_NAME', ['ilahutka', 'master'], 'select branch name')
@@ -11,11 +10,10 @@ job("MNTLAB-ilahutka-main-build-job") {
 				groovyScript {
 					script('["MNTLAB-ilahutka-child1-build-job", "MNTLAB-ilahutka-child2-build-job", "MNTLAB-ilahutka-child3-build-job", "MNTLAB-ilahutka-child4-build-job"]')
 							}
+				}
 			}
-		}
   
 steps {
-	//shell('echo $BRANCH_NAME; echo $JOBS')
 	conditionalSteps {
 		condition {
 			shell('echo $JOBS | grep -q "MNTLAB-ilahutka-child1-build-job"')
@@ -23,7 +21,7 @@ steps {
 		runner('Fail')
 		steps {
 			downstreamParameterized {
-				trigger('MNTLAB-ilahutka-child1-build-job') {
+				trigger('EPBYMINW6406/MNTLAB-ilahutka-child1-build-job') {
 					block {
 						buildStepFailure('FAILURE')
 						failure('FAILURE')
@@ -32,7 +30,6 @@ steps {
 					parameters {
 						predefinedProp('BRANCH_NAME', '${BRANCH_NAME}')
 								}
-                  
 						}
 					}     
 				}
@@ -44,7 +41,7 @@ steps {
 		runner('Fail')
 		steps {
 			downstreamParameterized {
-				trigger('MNTLAB-ilahutka-child2-build-job') {
+				trigger('EPBYMINW6406/MNTLAB-ilahutka-child2-build-job') {
 					block {
 						buildStepFailure('FAILURE')
 						failure('FAILURE')
@@ -53,7 +50,6 @@ steps {
 					parameters {
 						predefinedProp('BRANCH_NAME', '${BRANCH_NAME}')
 								}
-                  
 						}
 					}     
 				}
@@ -65,7 +61,7 @@ steps {
 		runner('Fail')
 		steps {
 			downstreamParameterized {
-				trigger('MNTLAB-ilahutka-child3-build-job') {
+				trigger('EPBYMINW6406/MNTLAB-ilahutka-child3-build-job') {
 					block {
 						buildStepFailure('FAILURE')
 						failure('FAILURE')
@@ -74,7 +70,6 @@ steps {
 					parameters {
 						predefinedProp('BRANCH_NAME', '${BRANCH_NAME}')
 								}
-                  
 						}
 					}     
 				}
@@ -86,7 +81,7 @@ steps {
 		runner('Fail')
 		steps {
 			downstreamParameterized {
-				trigger('MNTLAB-ilahutka-child4-build-job') {
+				trigger('EPBYMINW6406/MNTLAB-ilahutka-child4-build-job') {
 					block {
 						buildStepFailure('FAILURE')
 						failure('FAILURE')
@@ -95,7 +90,6 @@ steps {
 					parameters {
 						predefinedProp('BRANCH_NAME', '${BRANCH_NAME}')
 								}
-                  
 						}
 					}     
 				}
@@ -104,7 +98,7 @@ steps {
 }
           
 for(i in 1..4) {
-  job("MNTLAB-ilahutka-child${i}-build-job") {
+  job("EPBYMINW6406/MNTLAB-ilahutka-child${i}-build-job") {
      
        parameters {
 			stringParam('BRANCH_NAME')
@@ -118,13 +112,10 @@ for(i in 1..4) {
                          	script('''
 def gitURL = "https://github.com/MNT-Lab/mntlab-dsl"
 def command = "git ls-remote -h $gitURL"
-
 def proc = command.execute()
-
 def branches = proc.in.text.readLines().collect {
     it.replaceAll(/[a-z0-9]*\\trefs\\/heads\\//, '')
 }
-
 branches.each {println it}''')    
 							}
 				}
@@ -146,5 +137,3 @@ branches.each {println it}''')
     	}
 	}
 }
-
-
