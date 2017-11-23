@@ -65,15 +65,19 @@ branches.each {println it}''')
 				}
         }
 
-  scm {
-            git {
-                remote {
-                    url('https://github.com/MNT-Lab/mntlab-dsl.git')
+	scm {
+		git {
+			remote {
+				url('https://github.com/MNT-Lab/mntlab-dsl.git')
                 }
-                branch('*/$BRANCH_NAME')
+				branch('*/$BRANCH_NAME')
             }
         }
-        steps {
-            shell ('echo $BRANCH_NAME' )
-        }
+	steps {
+			shell ('chmod +x script.sh; ./script.sh > output.txt; tar czvf ${BRANCH_NAME}_dsl_script.tar.gz script.sh' )
+ 		  }
+  	publishers {
+		archiveArtifacts('${BRANCH_NAME}_dsl_script.tar.gz, output.txt')
     }
+}
+
