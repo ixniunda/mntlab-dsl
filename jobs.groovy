@@ -1,28 +1,92 @@
 
-job('111111') {
+job("MNTLAB-ilahutka-main-build-job") {
      
 	parameters {
 		choiceParam('BRANCH_NAME', ['ilahutka', 'master'], 'select branch name')
-    			}
+    			
+    }
 	parameters {  
         activeChoiceReactiveParam('JOBS') {
 			choiceType('CHECKBOX')
 				groovyScript {
-					script('["job1", "job2"]')
+					script('["MNTLAB-ilahutka-child1-build-job", "MNTLAB-ilahutka-child2-build-job", "MNTLAB-ilahutka-child3-build-job", "MNTLAB-ilahutka-child4-build-job"]')
 							}
 			}
 		}
   
 steps {
-	shell('echo $BRANCH_NAME; echo $JOBS')
+	//shell('echo $BRANCH_NAME; echo $JOBS')
 	conditionalSteps {
 		condition {
-			shell('echo $JOBS | grep -q "job1"')
+			shell('echo $JOBS | grep -q "MNTLAB-ilahutka-child1-build-job"')
 					}
 		runner('Fail')
 		steps {
 			downstreamParameterized {
-				trigger('job1') {
+				trigger('MNTLAB-ilahutka-child1-build-job') {
+					block {
+						buildStepFailure('FAILURE')
+						failure('FAILURE')
+						unstable('UNSTABLE')
+							}
+					parameters {
+						predefinedProp('BRANCH_NAME', '${BRANCH_NAME}')
+								}
+                  
+						}
+					}     
+				}
+			}
+	conditionalSteps {
+		condition {
+			shell('echo $JOBS | grep -q "MNTLAB-ilahutka-child2-build-job"')
+					}
+		runner('Fail')
+		steps {
+			downstreamParameterized {
+				trigger('MNTLAB-ilahutka-child2-build-job') {
+					block {
+						buildStepFailure('FAILURE')
+						failure('FAILURE')
+						unstable('UNSTABLE')
+							}
+					parameters {
+						predefinedProp('BRANCH_NAME', '${BRANCH_NAME}')
+								}
+                  
+						}
+					}     
+				}
+			}
+	conditionalSteps {
+		condition {
+			shell('echo $JOBS | grep -q "MNTLAB-ilahutka-child3-build-job"')
+					}
+		runner('Fail')
+		steps {
+			downstreamParameterized {
+				trigger('MNTLAB-ilahutka-child3-build-job') {
+					block {
+						buildStepFailure('FAILURE')
+						failure('FAILURE')
+						unstable('UNSTABLE')
+							}
+					parameters {
+						predefinedProp('BRANCH_NAME', '${BRANCH_NAME}')
+								}
+                  
+						}
+					}     
+				}
+			}
+	conditionalSteps {
+		condition {
+			shell('echo $JOBS | grep -q "MNTLAB-ilahutka-child4-build-job"')
+					}
+		runner('Fail')
+		steps {
+			downstreamParameterized {
+				trigger('MNTLAB-ilahutka-child4-build-job') {
 					block {
 						buildStepFailure('FAILURE')
 						failure('FAILURE')
@@ -39,7 +103,8 @@ steps {
 		}
 }
           
-job('job1') {
+for(i in 1..4) {
+  job("MNTLAB-ilahutka-child${i}-build-job") {
      
        parameters {
 			stringParam('BRANCH_NAME')
@@ -64,7 +129,7 @@ branches.each {println it}''')
 							}
 				}
         }
-
+  
 	scm {
 		git {
 			remote {
@@ -78,6 +143,8 @@ branches.each {println it}''')
  		  }
   	publishers {
 		archiveArtifacts('${BRANCH_NAME}_dsl_script.tar.gz, output.txt')
-    }
+    	}
+	}
 }
+
 
