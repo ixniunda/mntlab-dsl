@@ -1,7 +1,7 @@
 def student = "kshchura"
 
 
-job("MNTLAB-${student}-main-build-job") {
+job("EPBYMINW3093/MNTLAB-${student}-main-build-job") {
     description 'T10 main job'
     parameters {
         choiceParam('BRANCH', ['kshchura', 'master'])
@@ -22,7 +22,7 @@ job("MNTLAB-${student}-main-build-job") {
             runner('Run')
             steps {
                 downstreamParameterized {
-                    trigger("MNTLAB-${student}-child1-build-job") {
+                    trigger("EPBYMINW3093/MNTLAB-${student}-child1-build-job") {
                         block {
                             buildStepFailure('FAILURE')
                             failure('FAILURE')
@@ -45,7 +45,7 @@ job("MNTLAB-${student}-main-build-job") {
             runner('Run')
             steps {
                 downstreamParameterized {
-                    trigger("MNTLAB-${student}-child2-build-job") {
+                    trigger("EPBYMINW3093/MNTLAB-${student}-child2-build-job") {
                         block {
                             buildStepFailure('FAILURE')
                             failure('FAILURE')
@@ -67,7 +67,7 @@ job("MNTLAB-${student}-main-build-job") {
             runner('Run')
             steps {
                 downstreamParameterized {
-                    trigger("MNTLAB-${student}-child3-build-job") {
+                    trigger("EPBYMINW3093/MNTLAB-${student}-child3-build-job") {
                         block {
                             buildStepFailure('FAILURE')
                             failure('FAILURE')
@@ -88,7 +88,7 @@ job("MNTLAB-${student}-main-build-job") {
             runner('Run')
             steps {
                 downstreamParameterized {
-                    trigger("MNTLAB-${student}-child4-build-job") {
+                    trigger("EPBYMINW3093/MNTLAB-${student}-child4-build-job") {
                         block {
                             buildStepFailure('FAILURE')
                             failure('FAILURE')
@@ -107,7 +107,7 @@ job("MNTLAB-${student}-main-build-job") {
 }
 
 for (i in 1..4) {
-    job("MNTLAB-kshchura-child${i}-build-job") {
+    job("EPBYMINW3093/MNTLAB-kshchura-child${i}-build-job") {
         description "T10 child${i} job"
         parameters {
             stringParam('BRANCH')
