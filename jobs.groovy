@@ -26,9 +26,23 @@ steps {
 						failure('FAILURE')
 						unstable('UNSTABLE')
 							}
+					parameters {
+						predefinedProp('BRANCH_NAME', '${BRANCH_NAME}')
+								}
+                  
 						}
 					}     
 				}
 			}
 		}
-	}
+}
+
+job('job1') {
+	
+	parameters {
+		stringParam('BRANCH_NAME')
+				}
+	steps {
+		shell('echo $BRANCH_NAME')
+    }
+}
