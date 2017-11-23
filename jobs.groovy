@@ -63,7 +63,7 @@ job('EPBYMINW2467/Main') {
         }
     }
     steps {
-        shell('echo "здравствуй, мир"')
+        shell('echo "Hello world!111"')
     }
    
 
