@@ -2,11 +2,11 @@ def branchName = "ilakhtenkov"
 def folderName = "EPBYMINW2033"
 def childJobsNumber = 4
 
-/*folder(folderName) {
+folder(folderName) {
     description('This is folder of '+folderName)
     displayName('Igor Lakhtenkov')
     
-}*/
+}
 
 job(folderName+'/MNTLAB-'+branchName+'-main-build-job') {
     description 'This is test main job'
