@@ -1,6 +1,3 @@
-freeStyleJob('app') {
-    keepDependencies(false)
-    properties {
     }
   parameters {
         activeChoiceReactiveParam('BRANCH_NAME') {
@@ -11,15 +8,15 @@ freeStyleJob('app') {
 def command = "git ls-remote -h $gitURL"
 
 def proc = command.execute()
-proc.waitFor()              
+proc.waitFor()
 
 if ( proc.exitValue() != 0 ) {
    println "Error, ${proc.err.text}"
    System.exit(-1)
 }
 
-def branches = proc.in.text.readLines().collect { 
-    it.replaceAll(/[a-z0-9]*\trefs\\/heads\\//, '') 
+def branches = proc.in.text.readLines().collect {
+    it.replaceAll(/[a-z0-9]*\trefs\\/heads\\//, '')
 }
 return branches
 ''')
@@ -29,13 +26,13 @@ return branches
     }
 
 
-  
+
     label()
     disabled(false)
     triggers {
-      
-      
-      
+
+
+
     }
     concurrentBuild(false)
     steps {
@@ -43,3 +40,5 @@ return branches
       publishers {
     }
 }
+~                                                                                                                                                                                        
+~                  
