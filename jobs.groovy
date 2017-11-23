@@ -1,16 +1,34 @@
-#!/home/jenkins/groovy-2.4.12/bin/groovy
 
 job('111111') {
      
-      parameters {
-        choiceParam('BRANCH_NAME', ['ilahutka', 'master'], 'select branch name')
-        activeChoiceReactiveParam('JOBS') {
-           // filterable()
-            choiceType('CHECKBOX')
-            groovyScript {
-                script('return ["job1", "job2"]')
-                //fallbackScript('"fallback choice"')
-            }
-        }
-    }
- }
+	parameters {
+		choiceParam('BRANCH_NAME', ['ilahutka', 'master'], 'select branch name')
+			activeChoiceReactiveParam('JOBS') {
+				choiceType('CHECKBOX')
+					groovyScript {
+						script('["job1", "job2"]')
+								}
+				}
+			}
+  
+steps {
+	shell('echo $BRANCH_NAME; echo $JOBS')
+	conditionalSteps {
+		condition {
+			shell('echo $JOBS | grep -q "job1"')
+					}
+		runner('Fail')
+		steps {
+			downstreamParameterized {
+				trigger('job1') {
+					block {
+						buildStepFailure('FAILURE')
+						failure('FAILURE')
+						unstable('UNSTABLE')
+							}
+						}
+					}     
+				}
+			}
+		}
+	}
