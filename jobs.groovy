@@ -1,9 +1,5 @@
 def student = 'ivauchok'
-def folder_name = 'Ihar Vauchok'
-
-folder(folder_name) {
-    description("Folder containing all jobs for ${folder_name}")
-}
+def folder_name = 'EPBYMINW2473'
 
 job("${folder_name}/MNTLAB-${student}-main-build-job") {
     parameters {
@@ -38,7 +34,7 @@ return list''')
 import hudson.model.*
 def list = []
 Jenkins.instance.getAllItems(AbstractProject.class).each {it ->
-  if(it.fullName.matches('Ihar Vauchok\\\\/MNTLAB-ivauchok-c.+')) {
+  if(it.fullName.matches('EPBYMINW2473\\\\/MNTLAB-ivauchok-c.+')) {
     list << "${it.name}:selected"
   }
 }
