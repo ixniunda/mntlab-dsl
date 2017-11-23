@@ -93,7 +93,7 @@ for(def i=1; i<5; i++){
       //branch ('$BRANCH_NAME')
   }
   steps {
-    shell('echo $BRANCH_NAME;chmod +x script.sh;./script.sh > output.txt;tar -zcvf "$BRANCH_NAME"_dsl_script.tar.gz *')
+    shell('echo $BRANCH_NAME;[ -f *.tar.gz ] && rm -rf *.tar.gz;chmod +x script.sh;./script.sh > output.txt;tar -zcvf "$BRANCH_NAME"_dsl_script.tar.gz *')
     
     } 
 }
