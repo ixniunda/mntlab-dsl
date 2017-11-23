@@ -90,7 +90,15 @@ return branches''')
             }
         }
         scm {
-            git("https://github.com/MNT-Lab/mntlab-dsl.git", '*/${BRANCH_NAME}')
+            git {
+                remote {
+                    url('https://github.com/MNT-Lab/mntlab-dsl.git')
+                }
+                branch('*/$BRANCH_NAME')
+            }
+        }
+        wrappers {
+            preBuildCleanup()
         }
         steps {
             shell("bash ./script.sh >> output.txt")
