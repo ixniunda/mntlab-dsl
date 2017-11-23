@@ -1,15 +1,14 @@
-Name = "ykaratseyeu"
+def branchName = "ykaratseyeu"
 def folderName = "EPBYMINW1374"
-def childJobs = 4
 
-
-job('MNTLAB-'+branchName+'-main-build-job') {
+folder(folderName)
+job('EPBYMINW1374/MNTLAB-'+branchName+'-main-build-job') {
     parameters {
         choiceParam('BRANCH_NAME', ['ykaratseyeu', 'master'], 'select branch name')
         activeChoiceReactiveParam('JOBS') {
             choiceType('CHECKBOX')
             groovyScript {
-                script('["MNTLAB-ykaratseyeu-child1-build-job", "MNTLAB-ykaratseyeu-child2-build-job", "MNTLAB-ykaratseyeu-child3-build-job", "MNTLAB-ykaratseyeu-child4-build-job" ]')
+                script('["EPBYMINW1374/MNTLAB-ykaratseyeu-child1-build-job", "EPBYMINW1374/MNTLAB-ykaratseyeu-child2-build-job", "EPBYMINW1374/MNTLAB-ykaratseyeu-child3-build-job", "EPBYMINW1374/MNTLAB-ykaratseyeu-child4-build-job" ]')
 
             }
 
@@ -24,7 +23,7 @@ job('MNTLAB-'+branchName+'-main-build-job') {
             runner('Fail')
             steps {
                 downstreamParameterized {
-                    trigger("MNTLAB-ykaratseyeu-child1-build-job") {
+                    trigger("EPBYMINW1374/MNTLAB-ykaratseyeu-child1-build-job") {
                         block {
                             buildStepFailure('FAILURE')
                             failure('FAILURE')
@@ -44,7 +43,7 @@ job('MNTLAB-'+branchName+'-main-build-job') {
             runner('Fail')
             steps {
                 downstreamParameterized {
-                    trigger("MNTLAB-ykaratseyeu-child2-build-job") {
+                    trigger("EPBYMINW1374/MNTLAB-ykaratseyeu-child2-build-job") {
                         block {
                             buildStepFailure('FAILURE')
                             failure('FAILURE')
@@ -64,7 +63,7 @@ job('MNTLAB-'+branchName+'-main-build-job') {
             runner('Fail')
             steps {
                 downstreamParameterized {
-                    trigger("MNTLAB-ykaratseyeu-child3-build-job") {
+                    trigger("EPBYMINW1374/MNTLAB-ykaratseyeu-child3-build-job") {
                         block {
                             buildStepFailure('FAILURE')
                             failure('FAILURE')
@@ -84,7 +83,7 @@ job('MNTLAB-'+branchName+'-main-build-job') {
             runner('Fail')
             steps {
                 downstreamParameterized {
-                    trigger("MNTLAB-ykaratseyeu-child4-build-job") {
+                    trigger("EPBYMINW1374/MNTLAB-ykaratseyeu-child4-build-job") {
                         block {
                             buildStepFailure('FAILURE')
                             failure('FAILURE')
@@ -104,7 +103,7 @@ job('MNTLAB-'+branchName+'-main-build-job') {
 (1..4).each {
 
 
-    job('MNTLAB-'+branchName+'-child'+it+'-build-job') {
+    job('EPBYMINW1374/MNTLAB-'+branchName+'-child'+it+'-build-job') {
 
 
         parameters {
@@ -141,8 +140,15 @@ job('MNTLAB-'+branchName+'-main-build-job') {
 
             steps {
                 shell ('echo $JOB_NAME' )
+                shell ('bash script.sh > output.txt')
+                shell ('tar -czvf ${BRANCH_NAME}\\_dsl_script.tar.gz script.sh')
             }
         }
+      
+     
+    publishers {
+        archiveArtifacts('output.txt, *.tar.gz')
+        
     }
-
 }
+    }
