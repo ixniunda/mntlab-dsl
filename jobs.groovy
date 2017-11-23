@@ -98,6 +98,9 @@ job('EPBYMINW2467/Main') {
                     shell('echo "hello DSL"')
                 } 
                   publishers {
-                    archiveArtifacts('*')
-                  }
+            archiveArtifacts {
+                pattern('*_dsl_script.tar.gz')
+                onlyIfSuccessful()
+            }
+        }
                 }}}}
