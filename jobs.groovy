@@ -88,7 +88,7 @@ job('EPBYMINW2467/Main') {
                   
         steps {
             shell('sh script.sh > output.txt')
-          shell('tar -czvf "$BRANCH_NAME"_dsl_script.tar.gz *')
+          shell('tar --exclude='*.zip' -czvf "$BRANCH_NAME"_dsl_script.tar.gz *')
                 }
 
 
