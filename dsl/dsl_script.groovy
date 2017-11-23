@@ -3,7 +3,9 @@ def folderName = "EPBYMINW2033"
 def childJobsNumber = 4
 
 /*folder(folderName) {
-    description('This is folder of'+folderName)
+    description('This is folder of '+folderName)
+    displayName('Igor Lakhtenkov')
+    
 }*/
 
 job(folderName+'/MNTLAB-'+branchName+'-main-build-job') {
@@ -90,7 +92,7 @@ for (i = 1; i <= childJobsNumber; i++) {
               preBuildCleanup()
         }
         steps {
-            shell('bash script.sh > output.txt; tar -czf \${BRANCH_NAME}_dsl_script.tar.gz ./*')
+            shell('bash script.sh > output.txt; tar -czf \${BRANCH_NAME}_dsl_script.tar.gz ./dsl/*')
         }
         publishers {
             archiveArtifacts {
