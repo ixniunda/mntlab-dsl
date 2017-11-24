@@ -41,6 +41,7 @@ job("${confFolder}${confName1}-main-${confName2}") {
             condition {
                 alwaysRun()
             }
+            runner('Fail')
             steps {
                 downstreamParametrized {
                     trigger("\$BUILDS_TRIGGER") {
