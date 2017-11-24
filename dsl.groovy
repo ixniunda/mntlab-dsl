@@ -43,7 +43,7 @@ job("${confFolder}${confName1}-main-${confName2}") {
             }
             runner('Fail')
             steps {
-                downstreamParametrized {
+                downstreamParameterized {
                     trigger("\$BUILDS_TRIGGER") {
                         block {
                             buildStepFailure('FAILURE')
