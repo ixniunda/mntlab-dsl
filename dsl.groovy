@@ -37,14 +37,21 @@ job("${confFolder}${confName1}-main-${confName2}") {
         }
     }
     steps {
-        downstreamParametrized {
-            trigger ("\$BUILDS_TRIGGER") {
-                block {
-                    buildStepFailure('FAILURE')
-                    failure('FAILURE')
-                }
-                parameters {
-                    predefinedProp("BRANCH_NAME", "\$BRANCH_NAME")
+        conditionalSteps {
+            condition {
+                alwaysRun()
+            }
+            steps {
+                downstreamParametrized {
+                    trigger("\$BUILDS_TRIGGER") {
+                        block {
+                            buildStepFailure('FAILURE')
+                            failure('FAILURE')
+                        }
+                        parameters {
+                            predefinedProp("BRANCH_NAME", "\$BRANCH_NAME")
+                        }
+                    }
                 }
             }
         }
