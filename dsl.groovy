@@ -11,7 +11,7 @@ job("${confFolder}${confName1}-main-${confName2}") {
         git {
             remote {
                 url(confGit)
-                branch({"*/${confBranch}"})
+                branch("*/${confBranch}")
             }
         }
     }
