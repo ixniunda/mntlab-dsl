@@ -28,8 +28,8 @@ job("${confFolder}${confName1}-main-${confName2}") {
                 script(
                        'import hudson.model.*; ' +
                        'import jenkins.model.*; ' +
-                       'result = []; ' +
-                       'foundJobs = Jenkins.instance.getAllItems(AbstractProject.class).findAll { job -> job.name =~ /(.*)child(.*)/}; ' +
+                       'def result = []; ' +
+                       'def foundJobs = Jenkins.instance.getAllItems(AbstractProject.class).findAll { job -> job.name =~ /(.*)child(.*)/}; ' +
                        'foundJobs.each { job -> result.add("$job.name") }; ' +
                        'return result; '
                 )
@@ -71,7 +71,7 @@ while (i <= confChildNumber) {
             }
         }
         steps {
-            shell("./script.sh; tar -czvf artifact-dsl-\$BUILD_NUMBER.tar.gz dsl.groovy")
+            shell("bash script.sh; tar -czvf artifact-dsl-\$BUILD_NUMBER.tar.gz dsl.groovy")
         }
         parameters {
             activeChoiceParam('BRANCH_NAME') {
