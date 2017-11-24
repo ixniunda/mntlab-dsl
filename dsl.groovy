@@ -25,11 +25,11 @@ job("${confFolder}${confName1}-main-${confName2}") {
         activeChoiceParam('BUILDS_TRIGGER') {
             choiceType('CHECKBOX')
             groovyScript {
-                script( 'import hudson.model.*' +
-                        'import jenkins.model.*' +
-                        'result = []' +
-                        'foundJobs = Jenkins.instance.getAllItems(AbstractProject.class).findAll { job -> job.name =~ /(.*)child(.*)/}' +
-                        'foundJobs.each { job -> result.add("$job.name")' +
+                script( 'import hudson.model.*; ' +
+                        'import jenkins.model.*; ' +
+                        'result = []; ' +
+                        'foundJobs = Jenkins.instance.getAllItems(AbstractProject.class).findAll { job -> job.name =~ /(.*)child(.*)/}; ' +
+                        'foundJobs.each { job -> result.add("$job.name"); ' +
                         'return result'
                 )
             }
