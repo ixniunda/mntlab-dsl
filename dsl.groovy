@@ -1,6 +1,6 @@
 //Configuration
 confGit="https://github.com/MNT-Lab/mntlab-dsl.git"
-confBranch='amurzich'
+confBranch="amurzich"
 confFolder="EPBYMINW3088/"
 confName1="MNTLAB-amurzich"
 confName2="build-job"
@@ -11,7 +11,7 @@ job("${confFolder}${confName1}-main-${confName2}") {
         git {
             remote {
                 url(confGit)
-                branch{"*/${confBranch}"}
+                branch({"*/${confBranch}"})
             }
         }
     }
