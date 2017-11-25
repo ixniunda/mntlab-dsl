@@ -1,4 +1,4 @@
-def gitURL = "https://github.com/MNT-Lab/mntlab-dsl.git"
+tURL = "https://github.com/MNT-Lab/mntlab-dsl.git"
 def command = "git ls-remote -h $gitURL"
 
 def proc = command.execute()
@@ -16,7 +16,7 @@ def branches = proc.in.text.readLines().collect {
 
 
 
-job("MNTLAB-ataran-main-build-job") {
+job("EPBYMINW6405/MNTLAB-ataran-main-build-job") {
     parameters {
          choiceParam('BRANCH',['master','ataran']) 
    	}
@@ -65,7 +65,7 @@ return list ;
 
 
 
-job("MNTLAB-ataran-child1-build-job") {
+job("EPBYMINW6405/MNTLAB-ataran-child1-build-job") {
   parameters {
         stringParam('BRANCH_NAME')
     }
@@ -86,7 +86,7 @@ job("MNTLAB-ataran-child1-build-job") {
         shell 'bash script.sh'
     }
 }
-job("MNTLAB-ataran-child2-build-job") {
+job("EPBYMINW6405/MNTLAB-ataran-child2-build-job") {
   parameters {
         stringParam('BRANCH_NAME')
     }
@@ -107,7 +107,7 @@ job("MNTLAB-ataran-child2-build-job") {
         shell 'bash script.sh'
     }
 }
-job("MNTLAB-ataran-child3-build-job") {
+job("EPBYMINW6405/MNTLAB-ataran-child3-build-job") {
   parameters {
         stringParam('BRANCH_NAME')
     }
@@ -128,7 +128,7 @@ job("MNTLAB-ataran-child3-build-job") {
         shell 'bash script.sh'
     }
 }
-job("MNTLAB-ataran-child4-build-job") {
+job("EPBYMINW6405/MNTLAB-ataran-child4-build-job") {
   parameters {
         stringParam('BRANCH_NAME')
     }
