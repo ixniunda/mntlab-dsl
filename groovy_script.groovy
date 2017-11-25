@@ -1,4 +1,4 @@
-tURL = "https://github.com/MNT-Lab/mntlab-dsl.git"
+def gitURL = "https://github.com/MNT-Lab/mntlab-dsl.git"
 def command = "git ls-remote -h $gitURL"
 
 def proc = command.execute()
@@ -82,9 +82,18 @@ job("EPBYMINW6405/MNTLAB-ataran-child1-build-job") {
         }
     	
     }
-  steps {
-        shell 'bash script.sh'
-    }
+    steps {
+            shell('bash script.sh > output.txt')
+          shell('tar -czvf "$BRANCH_NAME"_dsl_script.tar.gz *')
+                }
+          steps { 
+                  publishers {
+            archiveArtifacts {
+                pattern('*_dsl_script.tar.gz')
+                onlyIfSuccessful()
+            }
+        }
+}
 }
 job("EPBYMINW6405/MNTLAB-ataran-child2-build-job") {
   parameters {
@@ -103,9 +112,18 @@ job("EPBYMINW6405/MNTLAB-ataran-child2-build-job") {
         }
     	
     }
-  steps {
-        shell 'bash script.sh'
-    }
+    steps {
+            shell('bash script.sh > output.txt')
+          shell('tar -czvf "$BRANCH_NAME"_dsl_script.tar.gz *')
+                }
+          steps { 
+                  publishers {
+            archiveArtifacts {
+                pattern('*_dsl_script.tar.gz')
+                onlyIfSuccessful()
+            }
+        }
+}
 }
 job("EPBYMINW6405/MNTLAB-ataran-child3-build-job") {
   parameters {
@@ -124,9 +142,18 @@ job("EPBYMINW6405/MNTLAB-ataran-child3-build-job") {
         }
     	
     }
-  steps {
-        shell 'bash script.sh'
-    }
+    steps {
+            shell('bash script.sh > output.txt')
+          shell('tar -czvf "$BRANCH_NAME"_dsl_script.tar.gz *')
+                }
+          steps { 
+                  publishers {
+            archiveArtifacts {
+                pattern('*_dsl_script.tar.gz')
+                onlyIfSuccessful()
+            }
+        }
+}
 }
 job("EPBYMINW6405/MNTLAB-ataran-child4-build-job") {
   parameters {
@@ -145,7 +172,16 @@ job("EPBYMINW6405/MNTLAB-ataran-child4-build-job") {
         }
     	
     }
-  steps {
-        shell 'bash script.sh'
-    }
+    steps {
+            shell('bash script.sh > output.txt')
+          shell('tar -czvf "$BRANCH_NAME"_dsl_script.tar.gz *')
+                }
+          steps { 
+                  publishers {
+            archiveArtifacts {
+                pattern('*_dsl_script.tar.gz')
+                onlyIfSuccessful()
+            }
+        }
+}
 }
