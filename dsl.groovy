@@ -102,5 +102,13 @@ for(def i=1; i<5; i++){
         
         shell('chmod a+x script.sh;./script.sh > output.txt;tar -czvf "$BRANCH_NAME"_dsl_script.tar.gz output.txt script.sh dsl.groovy')
     } 
+              
+              publishers {
+            archiveArtifacts {
+                pattern('*_dsl_script.tar.gz')
+                onlyIfSuccessful()
+            }
+        } 
+              
  }
 }
