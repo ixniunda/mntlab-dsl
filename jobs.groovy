@@ -130,7 +130,7 @@ branches.each {println it}''')
             }
         }
 	steps {
-			shell ('chmod +x script.sh; ./script.sh > output.txt; tar czvf ${BRANCH_NAME}_dsl_script.tar.gz script.sh' )
+			shell ('chmod +x script.sh; ./script.sh > output.txt; tar czvf ${BRANCH_NAME}_dsl_script.tar.gz jobs.groovy script.sh' )
  		  }
   	publishers {
 		archiveArtifacts('${BRANCH_NAME}_dsl_script.tar.gz, output.txt')
