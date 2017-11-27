@@ -19,7 +19,7 @@ for(def i=1; i<5; i++){
         archiveArtifacts {
             pattern('*.tar.gz')
             onlyIfSuccessful()
-        }}}
+        }}}}
 job('EPBYMINW2470/MNTLAB-kkaliada-main-build-job') {
     parameters {
         activeChoiceReactiveParam('BRANCH_NAME') {
