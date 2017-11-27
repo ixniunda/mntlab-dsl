@@ -67,3 +67,18 @@ def mainListBranches = convertListBranches.findAll { it.matches('"kzalialetdzina
   
         runner('Fail')
       }
+
+ downstreamParameterized {
+        trigger('$JOB_NAME') {
+          block {
+            buildStepFailure('FAILURE')
+            failure('FAILURE')
+            unstable('FAILURE')
+          }
+          parameters {
+            predefinedProp('BRANCH_NAME', '$MAIN_BRANCH')
+          }
+        }
+      }
+    }
+  }
