@@ -67,8 +67,8 @@ def mainListBranches = convertListBranches.findAll { it.matches('"kzalialetdzina
   
         runner('Fail')
       }
-
- downstreamParameterized {
+  
+      downstreamParameterized {
         trigger('$JOB_NAME') {
           block {
             buildStepFailure('FAILURE')
@@ -82,3 +82,38 @@ def mainListBranches = convertListBranches.findAll { it.matches('"kzalialetdzina
       }
     }
   }
+  
+  (1..jobs).each {
+    job("${workstation}/MNTLAB-${student}-child${it}-${prefix}") {
+      parameters {
+        activeChoiceParam('BRANCH_NAME') {
+              description('Choose a current branch')
+              choiceType('SINGLE_SELECT')
+              groovyScript {
+                script("${convertListBranches}")
+                  fallbackScript('"fallback choice"')
+              }
+        }
+      }
+  
+    scm {
+      git {
+        remote {
+          url("https://github.com/${project}.git")
+        }
+        branch('${BRANCH_NAME}')
+      }
+    }
+  
+      steps {
+          shell('''
+                   bash script.sh > output.txt
+                   tar -czvf ${BRANCH_NAME}_dsl_script.tar.gz output.txt
+                ''')
+      }
+  
+      publishers {
+        archiveArtifacts('${BRANCH_NAME}_dsl_script.tar.gz')
+      }
+  }
+}
