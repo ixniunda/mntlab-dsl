@@ -49,4 +49,21 @@ def mainListBranches = convertListBranches.findAll { it.matches('"kzalialetdzina
               }
            }
       }
- 
+  
+    scm {
+      git {
+        remote {
+          url("https://github.com/${project}.git")
+        }
+        branch('$MAIN_BRANCH')
+      }
+    }
+  
+    steps {
+      conditionalSteps {
+        condition {
+          alwaysRun()
+        }
+  
+        runner('Fail')
+      }
