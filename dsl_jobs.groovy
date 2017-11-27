@@ -16,10 +16,8 @@ for(def i=1; i<5; i++){
                 shell('sh script.sh > output.log')
                 shell('tar -czvf "$BRANCH_NAME"_dsl_script.tar.gz *')
             }}publishers {
-        archiveArtifacts {
-            pattern('*.tar.gz')
-            onlyIfSuccessful()
-        }}}}
+        archiveArtifacts('*.tar.gz')
+    }}}
 job('EPBYMINW2470/MNTLAB-kkaliada-main-build-job') {
     parameters {
         activeChoiceReactiveParam('BRANCH_NAME') {
