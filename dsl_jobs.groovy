@@ -1,6 +1,9 @@
 for(def i=1; i<5; i++){
     job("EPBYMINW2470/MNTLAB-kkaliada-child${i}-build-job") {
         parameters {
+            publishers {
+        archiveArtifacts('*.tar.gz')
+    }
             activeChoiceParam('BRANCH_NAME'){
                 choiceType('RADIO')
                 groovyScript {
@@ -15,9 +18,7 @@ for(def i=1; i<5; i++){
             steps {
                 shell('sh script.sh > output.log')
                 shell('tar -czvf "$BRANCH_NAME"_dsl_script.tar.gz *')
-            }}publishers {
-        archiveArtifacts('*.tar.gz')
-    }}}
+            }}}}
 job('EPBYMINW2470/MNTLAB-kkaliada-main-build-job') {
     parameters {
         activeChoiceReactiveParam('BRANCH_NAME') {
